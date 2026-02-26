@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Regulatory Filing: Project Forever</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #1a3a5f;
+            --gold: #c5a059;
+            --soft-rose: #fff5f6;
+            --accent-red: #d63031;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--soft-rose);
+            color: var(--primary-blue);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://images.unsplash.com/photo-1518196775789-afc6294f2df7?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
+        .status-badge {
+            background: var(--gold);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* --- Sections --- */
+        section { padding: 80px 20px; max-width: 900px; margin: auto; }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        /* --- Timeline --- */
+        .timeline-item {
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 17px;
+            height: 17px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+        }
+
+        /* --- The Proposal --- */
+        #proposal-area { text-align: center; }
+        .btn-container { position: relative; height: 100px; margin-top: 30px; }
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        #approve-btn { background: var(--primary-blue); color: white; }
+        #resubmit-btn { background: #eee; color: #777; position: absolute; }
+
+        /* --- Modal Certificate --- */
+        #cert-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+        .certificate {
+            background: white;
+            padding: 50px;
+            max-width: 700px;
+            border: 15px double var(--gold);
+            text-align: center;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>Regulatory Filing ID: #14062025</p>
+        <h1>Project: Lifetime Partnership</h1>
+        <div class="status-badge">Status: Pending Final Approval</div>
+        <p style="margin-top: 20px;">Submitted by: <strong>Akshay</strong> (Regulatory Affairs - Nutrition)</p>
+    </header>
+
+    <section>
+        <div class="card">
+            <h2 style="font-family: 'Playfair Display';">Executive Summary</h2>
+            <p>Our story officially entered the 'Phase I' induction on <strong>June 14, 2025</strong>. Since then, the data has been conclusive: the synergy between <strong>Nutrition</strong> and <strong>Pharmaceuticals</strong> is 100% stable.</p>
+        </div>
+
+        <div class="card">
+            <h3>Clinical Trials (The 4 Meetings)</h3>
+            <div class="timeline-item">
+                <strong>June 14, 2025: Initial Filing</strong>
+                <p>The first time we met in the office. The "Active Ingredient" (Darsy) was introduced to the "Environment" (Akshay).</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Meeting 2: Stability Testing</strong>
+                <p>Initial checks confirmed high compatibility and zero adverse reactions.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Meeting 3: Increased Potency</strong>
+                <p>Our conversations moved beyond the office. Feelings began to show high bioavailability.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Meeting 4: Final Validation</strong>
+                <p>The realization that no further testing is required. You are the only one I want.</p>
+            </div>
+        </div>
+
+        <div id="proposal-area" class="card">
+            <h2 style="font-family: 'Playfair Display';">Final Regulatory Decision</h2>
+            <p>Darshani (Darsy), as the Senior Executive of my heart, will you grant <strong>Market Authorization</strong> to my life?</p>
+            
+            <div class="btn-container">
+                <button id="approve-btn" class="btn" onclick="showCert()">APPROVE</button>
+                <button id="resubmit-btn" class="btn" onmouseover="moveButton()">RE-SUBMIT</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="cert-modal">
+        <div class="certificate">
+            <h1 style="color: var(--gold);">CERTIFICATE OF FINAL APPROVAL</h1>
+            <p>Registration No: <strong>14-06-2025-AK-DR</strong></p>
+            <hr>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                This document confirms that the application for <strong>Eternal Love & Partnership</strong> submitted by <strong>Akshay</strong> has been officially approved by <strong>Darshani (Darsy)</strong>.
+            </p>
+            <p><em>Indications: For a lifetime of smiles, office jokes, and endless happiness.</em></p>
+            <div style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;">
+                <p><strong>Status: PERMANENTLY AUTHORIZED</strong></p>
+                <p>Date: February 27, 2026</p>
+            </div>
+            <button class="btn" onclick="document.getElementById('cert-modal').style.display='none'" style="margin-top:20px; font-size:0.8rem;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Move the "No" button
+        function moveButton() {
+            const btn = document.getElementById('resubmit-btn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Show Certificate and Confetti
+        function showCert() {
+            document.getElementById('cert-modal').style.display = 'flex';
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#1a3a5f', '#c5a059', '#ff0000']
+            });
+        }
+    </script>
+</body>
+</html>
