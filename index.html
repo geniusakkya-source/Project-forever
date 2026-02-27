@@ -3,194 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Regulatory Filing: Project Forever</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>RBC INDIA | Internal Filing #140625</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
     <style>
         :root {
-            --primary-blue: #1a3a5f;
-            --gold: #c5a059;
-            --soft-rose: #fff5f6;
-            --accent-red: #d63031;
+            --primary: #0f172a; /* Deep Midnight Blue */
+            --accent: #fbbf24;  /* Regulatory Gold */
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --success: #10b981;
+            --danger: #ef4444;
         }
 
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
             margin: 0;
-            background-color: var(--soft-rose);
-            color: var(--primary-blue);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* --- Hero Section --- */
-        header {
-            height: 100vh;
+        /* Sidebar Navigation */
+        nav {
+            width: 300px;
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            border-right: 5px solid var(--accent);
+        }
+
+        .nav-header { margin-bottom: 50px; }
+        .nav-header h2 { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; margin: 0; color: var(--accent); }
+        .nav-header p { font-size: 0.75rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+
+        .nav-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            display: flex;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://images.unsplash.com/photo-1518196775789-afc6294f2df7?auto=format&fit=crop&w=1500&q=80');
-            background-size: cover;
-            border-bottom: 5px solid var(--gold);
+            border: 1px solid transparent;
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.05); }
+        .nav-item.active { background: rgba(251, 191, 36, 0.1); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+        /* Main Content Area */
+        main { flex: 1; overflow-y: auto; padding: 60px; position: relative; }
+        .page { display: none; max-width: 800px; animation: slideUp 0.4s ease-out; }
+        .page.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
-        .status-badge {
-            background: var(--gold);
-            color: white;
-            padding: 5px 20px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        /* --- Sections --- */
-        section { padding: 80px 20px; max-width: 900px; margin: auto; }
+        /* Typography & UI Components */
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
+        .subtitle { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 40px; }
+        
         .card {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
-        }
-
-        /* --- Timeline --- */
-        .timeline-item {
-            border-left: 3px solid var(--gold);
-            padding-left: 20px;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            position: relative;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 0;
-            width: 17px;
-            height: 17px;
-            background: var(--primary-blue);
-            border-radius: 50%;
         }
 
-        /* --- The Proposal --- */
-        #proposal-area { text-align: center; }
-        .btn-container { position: relative; height: 100px; margin-top: 30px; }
+        .highlight { color: var(--primary); font-weight: 700; border-bottom: 2px solid var(--accent); }
+        
+        /* The Audit Log Look */
+        .log-entry { margin-bottom: 40px; padding-left: 20px; border-left: 2px solid var(--accent); }
+        .log-date { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary); font-size: 0.85rem; margin-bottom: 5px; }
+        .log-desc { font-size: 1rem; line-height: 1.7; color: var(--text-main); }
+        
+        .deviation-box {
+            background: #fff1f2;
+            border: 1px dashed var(--danger);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .deviation-header { color: var(--danger); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+
+        /* Final Action Section */
+        .proposal-box { text-align: center; padding: 60px 40px; background: var(--primary); color: white; border-radius: 16px; margin-top: 40px; }
         .btn {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
-            font-weight: 600;
+            border: none;
+            margin: 10px;
         }
-        #approve-btn { background: var(--primary-blue); color: white; }
-        #resubmit-btn { background: #eee; color: #777; position: absolute; }
+        .btn-yes { background: var(--accent); color: var(--primary); }
+        .btn-yes:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+        .btn-no { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; }
 
-        /* --- Modal Certificate --- */
-        #cert-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center; align-items: center;
-            z-index: 1000;
-        }
-        .certificate {
-            background: white;
-            padding: 50px;
-            max-width: 700px;
-            border: 15px double var(--gold);
-            text-align: center;
-            position: relative;
-        }
+        /* Signatures */
+        .signature { margin-top: 40px; font-family: 'JetBrains Mono', monospace; text-align: left; }
     </style>
 </head>
 <body>
 
-    <header>
-        <p>Regulatory Filing ID: #14062025</p>
-        <h1>Project: Lifetime Partnership</h1>
-        <div class="status-badge">Status: Pending Final Approval</div>
-        <p style="margin-top: 20px;">Submitted by: <strong>Akshay</strong> (Regulatory Affairs - Nutrition)</p>
-    </header>
-
-    <section>
-        <div class="card">
-            <h2 style="font-family: 'Playfair Display';">Executive Summary</h2>
-            <p>Our story officially entered the 'Phase I' induction on <strong>June 14, 2025</strong>. Since then, the data has been conclusive: the synergy between <strong>Nutrition</strong> and <strong>Pharmaceuticals</strong> is 100% stable.</p>
+    <nav>
+        <div class="nav-header">
+            <h2>RBC INDIA</h2>
+            <p>Regulatory Submission v3.1</p>
         </div>
+        <div class="nav-item active" onclick="showPage('intro', this)">01 / Executive Summary</div>
+        <div class="nav-item" onclick="showPage('audits1', this)">02 / Site Audits (Phase I)</div>
+        <div class="nav-item" onclick="showPage('audits2', this)">03 / Site Audits (Phase II)</div>
+        <div class="nav-item" onclick="showPage('quality', this)">04 / Quality Analysis</div>
+        <div class="nav-item" onclick="showPage('final', this)">05 / Final Authorization</div>
+    </nav>
 
-        <div class="card">
-            <h3>Clinical Trials (The 4 Meetings)</h3>
-            <div class="timeline-item">
-                <strong>June 14, 2025: Initial Filing</strong>
-                <p>The first time we met in the office. The "Active Ingredient" (Darsy) was introduced to the "Environment" (Akshay).</p>
-            </div>
-            <div class="timeline-item">
-                <strong>Meeting 2: Stability Testing</strong>
-                <p>Initial checks confirmed high compatibility and zero adverse reactions.</p>
-            </div>
-            <div class="timeline-item">
-                <strong>Meeting 3: Increased Potency</strong>
-                <p>Our conversations moved beyond the office. Feelings began to show high bioavailability.</p>
-            </div>
-            <div class="timeline-item">
-                <strong>Meeting 4: Final Validation</strong>
-                <p>The realization that no further testing is required. You are the only one I want.</p>
-            </div>
-        </div>
-
-        <div id="proposal-area" class="card">
-            <h2 style="font-family: 'Playfair Display';">Final Regulatory Decision</h2>
-            <p>Darshani (Darsy), as the Senior Executive of my heart, will you grant <strong>Market Authorization</strong> to my life?</p>
+    <main>
+        <div id="intro" class="page active">
+            <h1>Submission of Intent</h1>
+            <p class="subtitle">PROJECT ID: 14-06-2025-AD | STATUS: URGENT REVIEW</p>
             
-            <div class="btn-container">
-                <button id="approve-btn" class="btn" onclick="showCert()">APPROVE</button>
-                <button id="resubmit-btn" class="btn" onmouseover="moveButton()">RE-SUBMIT</button>
+            <div class="card">
+                <p>The story officially entered induction on <span class="highlight">14 June 2025</span>. It wasn't a formal meeting, but a moment of shared transparency. In front of the entire department, you asked me for a reminder about the <strong>Sankashti Chaturthi</strong> fast.</p>
+                <p>To anyone else at RBC India, it was just office talk. To me, it was a hint—a sign that you had an interest in me. That moment opened the door. We started talking, sharing our pasts, the bad decisions we made, and the truths of our lives. You trusted me with your story, and I trusted you with mine.</p>
             </div>
         </div>
-    </section>
 
-    <div id="cert-modal">
-        <div class="certificate">
-            <h1 style="color: var(--gold);">CERTIFICATE OF FINAL APPROVAL</h1>
-            <p>Registration No: <strong>14-06-2025-AK-DR</strong></p>
-            <hr>
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-                This document confirms that the application for <strong>Eternal Love & Partnership</strong> submitted by <strong>Akshay</strong> has been officially approved by <strong>Darshani (Darsy)</strong>.
-            </p>
-            <p><em>Indications: For a lifetime of smiles, office jokes, and endless happiness.</em></p>
-            <div style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;">
-                <p><strong>Status: PERMANENTLY AUTHORIZED</strong></p>
-                <p>Date: February 27, 2026</p>
+        <div id="audits1" class="page">
+            <h1>Compliance Logs (Phase I)</h1>
+            <p class="subtitle">VERIFICATION OF INITIAL COMPATIBILITY</p>
+
+            <div class="log-entry">
+                <div class="log-date">21 JUNE 2025 | SITE: INORBIT MALL</div>
+                <div class="log-desc">
+                    Our first formal meeting at <strong>22nd Parallel</strong>. The data was captured clearly: you ate <strong>Idali</strong>, and I realized that being with you was the most natural thing in the world. Compatibility was high.
+                </div>
             </div>
-            <button class="btn" onclick="document.getElementById('cert-modal').style.display='none'" style="margin-top:20px; font-size:0.8rem;">Close</button>
+
+            <div class="log-entry">
+                <div class="log-date">27 JUNE 2025 | SITE: ALEMBIC CITY</div>
+                <div class="log-desc">
+                    A very significant date. We spent a lot of time together—long enough for Rakesh Sir from our department to spot us! It was a beautiful day, but one that requires a sincere disclosure:
+                </div>
+                <div class="deviation-box">
+                    <div class="deviation-header">Critical Deviation Report</div>
+                    Darshani, I touched you many times that day without your permission. I’ve carried that mistake with me. This filing is my formal promise to always respect your space and your boundaries. You deserve that respect, and I am sincerely sorry.
+                </div>
+                <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
+                    Note: Following this date, external factors changed as your parents arrived from Bangalore.
+                </p>
+            </div>
         </div>
-    </div>
+
+        <div id="audits2" class="page">
+            <h1>Compliance Logs (Phase II)</h1>
+            <p class="subtitle">STABILITY UNDER EXTERNAL PRESSURE</p>
+
+            <div class="log-entry">
+                <div class="log-date">21 JULY 2025 | SITE: NIRVANA CAFE</div>
+                <div class="log-desc">
+                    The day of the technical <strong>"Pachaka."</strong> A tomato ketchup packet was torn and the situation got messy. But looking back, that mess was perfect because it was ours. It showed me that even in small disasters, I liked being by your side.
+                </div>
+            </div>
+
+            <div class="log-entry">
+                <div class="log-date">15 SEPT 2025 | SITE: TEA POST</div>
+                <div class="log-desc">
+                    The final meeting. Your mom shared some very practical, difficult things—specifically, the request for us not to meet again. I left that meeting angry and frustrated. However, anger is temporary; hope is not.
+                </div>
+                <div class="card" style="margin-top:20px; border-left: 4px solid var(--accent);">
+                    Since September, I have tried to convince you many times. Even though we haven't met, I have stayed <strong>on hope</strong>. I am still here because I believe in what we started.
+                </div>
+            </div>
+        </div>
+
+        <div id="quality" class="page">
+            <h1>Quality Assurance Report</h1>
+            <p class="subtitle">SPECIFICATIONS OF DARSHANI (DARSY)</p>
+
+            <div class="card">
+                <h3>Technical Specification: Transparency</h3>
+                <p>I like you because you are a <span class="highlight">transparent girl</span>. In a world of complex submissions and office politics, you never hide who you are. That honesty is rare, and it is the quality I admire most in you.</p>
+            </div>
+
+            <div class="card">
+                <h3>Technical Specification: Support</h3>
+                <p>You have supported me in every tough situation I have faced. Whether at RBC India or in my personal life, you were the one who stood by me. You aren't just a colleague; <strong>you are my Darsy.</strong></p>
+            </div>
+        </div>
+
+        <div id="final" class="page">
+            <h1>Final Authorization</h1>
+            <p class="subtitle">REQUEST FOR OFFICIAL PARTNERSHIP</p>
+
+            <div class="proposal-box">
+                <p style="opacity:0.8; margin-bottom:10px;">Darshani,</p>
+                <h2 style="font-size:2.5rem; margin-bottom:30px;">Will you be my girlfriend?</h2>
+                
+                <button class="btn btn-yes" onclick="approve()">GRANT AUTHORIZATION</button>
+                <button class="btn btn-no" onclick="pending()">PENDING REVIEW</button>
+
+                <div class="signature">
+                    <p>Electronically Signed,</p>
+                    <p style="font-size:1.5rem; color:var(--accent); margin:0;">Akshay</p>
+                    <p style="font-size:0.7rem; opacity:0.6;">Regulatory Affairs Executive | RBC India</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // Move the "No" button
-        function moveButton() {
-            const btn = document.getElementById('resubmit-btn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+        function showPage(pageId, element) {
+            // Update Pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            // Update Nav
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(n => n.classList.remove('active'));
+            element.classList.add('active');
         }
 
-        // Show Certificate and Confetti
-        function showCert() {
-            document.getElementById('cert-modal').style.display = 'flex';
+        function approve() {
             confetti({
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#1a3a5f', '#c5a059', '#ff0000']
+                colors: ['#fbbf24', '#ffffff', '#0f172a']
             });
+            setTimeout(() => {
+                alert("Authorization Granted. The partnership is officially active. Can't wait to see you, Darshani!");
+            }, 500);
+        }
+
+        function pending() {
+            alert("The file remains open. My hope remains 100%. I will wait for you.");
         }
     </script>
 </body>
