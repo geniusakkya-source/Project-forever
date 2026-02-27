@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBC INDIA | Internal Filing #140625</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #0f172a; /* Deep Midnight Blue */
+            --accent: #fbbf24;  /* Regulatory Gold */
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 300px;
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 5px solid var(--accent);
+        }
+
+        .nav-header { margin-bottom: 50px; }
+        .nav-header h2 { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; margin: 0; color: var(--accent); }
+        .nav-header p { font-size: 0.75rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+
+        .nav-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            border: 1px solid transparent;
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.05); }
+        .nav-item.active { background: rgba(251, 191, 36, 0.1); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+        /* Main Content Area */
+        main { flex: 1; overflow-y: auto; padding: 60px; position: relative; }
+        .page { display: none; max-width: 800px; animation: slideUp 0.4s ease-out; }
+        .page.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & UI Components */
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--primary); }
+        .subtitle { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 40px; }
+        
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .highlight { color: var(--primary); font-weight: 700; border-bottom: 2px solid var(--accent); }
+        
+        /* The Audit Log Look */
+        .log-entry { margin-bottom: 40px; padding-left: 20px; border-left: 2px solid var(--accent); }
+        .log-date { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary); font-size: 0.85rem; margin-bottom: 5px; }
+        .log-desc { font-size: 1rem; line-height: 1.7; color: var(--text-main); }
+        
+        .deviation-box {
+            background: #fff1f2;
+            border: 1px dashed var(--danger);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .deviation-header { color: var(--danger); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; }
+
+        /* Final Action Section */
+        .proposal-box { text-align: center; padding: 60px 40px; background: var(--primary); color: white; border-radius: 16px; margin-top: 40px; }
+        .btn {
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            margin: 10px;
+        }
+        .btn-yes { background: var(--accent); color: var(--primary); }
+        .btn-yes:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+        .btn-no { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; }
+
+        /* Signatures */
+        .signature { margin-top: 40px; font-family: 'JetBrains Mono', monospace; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-header">
+            <h2>RBC INDIA</h2>
+            <p>Regulatory Submission v3.1</p>
+        </div>
+        <div class="nav-item active" onclick="showPage('intro', this)">01 / Executive Summary</div>
+        <div class="nav-item" onclick="showPage('audits1', this)">02 / Site Audits (Phase I)</div>
+        <div class="nav-item" onclick="showPage('audits2', this)">03 / Site Audits (Phase II)</div>
+        <div class="nav-item" onclick="showPage('quality', this)">04 / Quality Analysis</div>
+        <div class="nav-item" onclick="showPage('final', this)">05 / Final Authorization</div>
+    </nav>
+
+    <main>
+        <div id="intro" class="page active">
+            <h1>Submission of Intent</h1>
+            <p class="subtitle">PROJECT ID: 14-06-2025-AD | STATUS: URGENT REVIEW</p>
+            
+            <div class="card">
+                <p>The story officially entered induction on <span class="highlight">14 June 2025</span>. It wasn't a formal meeting, but a moment of shared transparency. In front of the entire department, you asked me for a reminder about the <strong>Sankashti Chaturthi</strong> fast.</p>
+                <p>To anyone else at RBC India, it was just office talk. To me, it was a hint—a sign that you had an interest in me. That moment opened the door. We started talking, sharing our pasts, the bad decisions we made, and the truths of our lives. You trusted me with your story, and I trusted you with mine.</p>
+            </div>
+        </div>
+
+        <div id="audits1" class="page">
+            <h1>Compliance Logs (Phase I)</h1>
+            <p class="subtitle">VERIFICATION OF INITIAL COMPATIBILITY</p>
+
+            <div class="log-entry">
+                <div class="log-date">21 JUNE 2025 | SITE: INORBIT MALL</div>
+                <div class="log-desc">
+                    Our first formal meeting at <strong>22nd Parallel</strong>. The data was captured clearly: you ate <strong>Idali</strong>, and I realized that being with you was the most natural thing in the world. Compatibility was high.
+                </div>
+            </div>
+
+            <div class="log-entry">
+                <div class="log-date">27 JUNE 2025 | SITE: ALEMBIC CITY</div>
+                <div class="log-desc">
+                    A very significant date. We spent a lot of time together—long enough for Rakesh Sir from our department to spot us! It was a beautiful day, but one that requires a sincere disclosure:
+                </div>
+                <div class="deviation-box">
+                    <div class="deviation-header">Critical Deviation Report</div>
+                    Darshani, I touched you many times that day without your permission. I’ve carried that mistake with me. This filing is my formal promise to always respect your space and your boundaries. You deserve that respect, and I am sincerely sorry.
+                </div>
+                <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);">
+                    Note: Following this date, external factors changed as your parents arrived from Bangalore.
+                </p>
+            </div>
+        </div>
+
+        <div id="audits2" class="page">
+            <h1>Compliance Logs (Phase II)</h1>
+            <p class="subtitle">STABILITY UNDER EXTERNAL PRESSURE</p>
+
+            <div class="log-entry">
+                <div class="log-date">21 JULY 2025 | SITE: NIRVANA CAFE</div>
+                <div class="log-desc">
+                    The day of the technical <strong>"Pachaka."</strong> A tomato ketchup packet was torn and the situation got messy. But looking back, that mess was perfect because it was ours. It showed me that even in small disasters, I liked being by your side.
+                </div>
+            </div>
+
+            <div class="log-entry">
+                <div class="log-date">15 SEPT 2025 | SITE: TEA POST</div>
+                <div class="log-desc">
+                    The final meeting. Your mom shared some very practical, difficult things—specifically, the request for us not to meet again. I left that meeting angry and frustrated. However, anger is temporary; hope is not.
+                </div>
+                <div class="card" style="margin-top:20px; border-left: 4px solid var(--accent);">
+                    Since September, I have tried to convince you many times. Even though we haven't met, I have stayed <strong>on hope</strong>. I am still here because I believe in what we started.
+                </div>
+            </div>
+        </div>
+
+        <div id="quality" class="page">
+            <h1>Quality Assurance Report</h1>
+            <p class="subtitle">SPECIFICATIONS OF DARSHANI (DARSY)</p>
+
+            <div class="card">
+                <h3>Technical Specification: Transparency</h3>
+                <p>I like you because you are a <span class="highlight">transparent girl</span>. In a world of complex submissions and office politics, you never hide who you are. That honesty is rare, and it is the quality I admire most in you.</p>
+            </div>
+
+            <div class="card">
+                <h3>Technical Specification: Support</h3>
+                <p>You have supported me in every tough situation I have faced. Whether at RBC India or in my personal life, you were the one who stood by me. You aren't just a colleague; <strong>you are my Darsy.</strong></p>
+            </div>
+        </div>
+
+        <div id="final" class="page">
+            <h1>Final Authorization</h1>
+            <p class="subtitle">REQUEST FOR OFFICIAL PARTNERSHIP</p>
+
+            <div class="proposal-box">
+                <p style="opacity:0.8; margin-bottom:10px;">Darshani,</p>
+                <h2 style="font-size:2.5rem; margin-bottom:30px;">Will you be my girlfriend?</h2>
+                
+                <button class="btn btn-yes" onclick="approve()">GRANT AUTHORIZATION</button>
+                <button class="btn btn-no" onclick="pending()">PENDING REVIEW</button>
+
+                <div class="signature">
+                    <p>Electronically Signed,</p>
+                    <p style="font-size:1.5rem; color:var(--accent); margin:0;">Akshay</p>
+                    <p style="font-size:0.7rem; opacity:0.6;">Regulatory Affairs Executive | RBC India</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showPage(pageId, element) {
+            // Update Pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            // Update Nav
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(n => n.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function approve() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#fbbf24', '#ffffff', '#0f172a']
+            });
+            setTimeout(() => {
+                alert("Authorization Granted. The partnership is officially active. Can't wait to see you, Darshani!");
+            }, 500);
+        }
+
+        function pending() {
+            alert("The file remains open. My hope remains 100%. I will wait for you.");
+        }
+    </script>
+</body>
+</html>
